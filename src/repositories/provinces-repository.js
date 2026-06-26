@@ -18,7 +18,6 @@ export default class ProvincesRepository {
         return await this.db.queryOne(sql, [id]);
     }
 
-    /*
     createAsync = async (entity) => {
         console.log(`ProvincesRepository.createAsync(${JSON.stringify(entity)})`);
         const sql = ` INSERT INTO provinces (
@@ -74,5 +73,4 @@ export default class ProvincesRepository {
         const sql = `DELETE FROM provinces WHERE id=$1`;
         return await this.db.queryRowCount(sql, [id]);
     }
-    */
 }

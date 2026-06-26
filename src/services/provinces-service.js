@@ -3,7 +3,7 @@ import ProvinceRepository from '../repositories/provinces-repository.js';
 export default class ProvinceService {
     constructor() {
         console.log('Estoy en: ProvinceService.constructor()');
-        this.ProvinceRepository = new CalificacionesRepository();
+        this.ProvinceRepository = new ProvinceRepository();
     }
 
     getAllAsync = async () => {
@@ -13,4 +13,28 @@ export default class ProvinceService {
         return returnArray;
     }
 
+    getByIdAsync = async (id) => {
+        console.log(`ProvinceService.getByIdAsync(${id})`);
+        const returnEntity = await this.ProvinceRepository.getByIdAsync(id);
+        return returnEntity;
+    }
+
+    createAsync = async (entity) => {
+        console.log(`ProvinceService.createAsync(${JSON.stringify(entity)})`);
+        const rowsAffected = await this.ProvinceRepository.createAsync(entity);
+        return rowsAffected;
+    }
+
+    updateAsync = async (entity) => {
+        console.log(`ProvinceService.updateAsync(${JSON.stringify(entity)})`);
+        
+        const rowsAffected = await this.ProvinceRepository.updateAsync(entity);
+        return rowsAffected;
+    }
+
+    deleteByIdAsync = async (id) => {
+        console.log(`ProvinceService.deleteByIdAsync(${id})`);
+        const rowsAffected = await this.ProvinceRepository.deleteByIdAsync(id);
+        return rowsAffected;
+    }
 }
