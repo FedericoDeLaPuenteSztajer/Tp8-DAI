@@ -21,11 +21,11 @@ export default class ProvincesRepository {
     createAsync = async (entity) => {
         console.log(`ProvincesRepository.createAsync(${JSON.stringify(entity)})`);
         const sql = ` INSERT INTO provinces (
-                            nombre              ,
-                            apellido            ,
-                            id_curso            ,
-                            fecha_nacimiento    ,
-                            hace_deportes
+                            name              ,
+                            full_name            ,
+                            latitude            ,
+                            longitude    ,
+                            display_order
                         ) VALUES (
                             $1,
                             $2,
@@ -34,11 +34,11 @@ export default class ProvincesRepository {
                             $5
                         ) RETURNING id`;
         const values = [
-            entity?.nombre           ?? '',
-            entity?.apellido         ?? '',
-            entity?.id_curso         ?? 0,
-            entity?.fecha_nacimiento ?? null,
-            entity?.hace_deportes    ?? 0
+            entity?.name           ?? '',
+            entity?.full_name         ?? '',
+            entity?.latitude         ?? 0,
+            entity?.longitude ?? null,
+            entity?.display_order    ?? 0
         ];
         return await this.db.queryReturnId(sql, values);
     }
@@ -51,19 +51,19 @@ export default class ProvincesRepository {
         if (previousEntity == null) return 0;
 
         const sql = `UPDATE provinces SET
-                        nombre              = $2,
-                        apellido            = $3,
-                        id_curso            = $4,
-                        fecha_nacimiento    = $5,
-                        hace_deportes       = $6
+                        name              = $2,
+                        full_name            = $3,
+                        latitude            = $4,
+                        longitude    = $5,
+                        display_order       = $6
                     WHERE id = $1`;
         const values = [
             id,
-            entity?.nombre           ?? previousEntity?.nombre,
-            entity?.apellido         ?? previousEntity?.apellido,
-            entity?.id_curso         ?? previousEntity?.id_curso,
-            entity?.fecha_nacimiento ?? previousEntity?.fecha_nacimiento,
-            entity?.hace_deportes    ?? previousEntity?.hace_deportes
+            entity?.name           ?? previousEntity?.name,
+            entity?.full_name         ?? previousEntity?.full_name,
+            entity?.latitude         ?? previousEntity?.latitude,
+            entity?.longitude ?? previousEntity?.longitude,
+            entity?.display_order    ?? previousEntity?.display_order
         ];
         return await this.db.queryRowCount(sql, values);
     }
