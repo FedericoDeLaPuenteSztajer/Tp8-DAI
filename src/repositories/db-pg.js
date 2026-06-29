@@ -1,5 +1,6 @@
 import pkg from 'pg'
 import config from './../config/db-config.js';
+import LogHelper from './../helpers/log-helper.js'
 
 const { Pool } = pkg;
 
@@ -23,7 +24,7 @@ export default class DbPg {
                 : await this.getDBPool().query(sql);
             returnArray = resultPg.rows;
         } catch (error) {
-            console.log(error);
+            LogHelper.logError(error);
         }
         return returnArray;
     }
