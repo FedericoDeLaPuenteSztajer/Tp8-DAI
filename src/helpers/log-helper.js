@@ -2,10 +2,10 @@ import fs from 'fs';
 
 class LogHelper {
     constructor() {
-        this.filePath               = process.env.LOG_FILE_PATH;
-        this.fileName               = process.env.LOG_FILE_NAME;
-        this.logToFileEnabled       = process.env.LOG_TO_FILE_ENABLED.toLowerCase() === 'true';
-        this.logToConsoleEnabled    = process.env.LOG_TO_CONSOLE_ENABLED.toLowerCase() === 'true';
+        this.filePath = process.env.LOG_FILE_PATH;
+        this.fileName = process.env.LOG_FILE_NAME;
+        this.logToFileEnabled = process.env.LOG_TO_FILE_ENABLED?.toLowerCase() === "true";
+        this.logToConsoleEnabled = process.env.LOG_TO_CONSOLE_ENABLED?.toLowerCase() === "true";
     }
 
     /**
@@ -15,7 +15,7 @@ class LogHelper {
     logError = (errorObject) => {
         // Formatear el objeto de error
         const formattedError = this.formatError(errorObject);
-        const fullFileName   = this.getFullFileName();
+        const fullFileName = this.getFullFileName();
 
         if (this.logToFileEnabled) {
             // Escribir el error en el archivo de registro
@@ -44,7 +44,7 @@ class LogHelper {
 
     getFullFileName = () => {
         // Obtiene la fecha actual en formato YYYY-MM-DD
-        let returnValue = this.filePath; 
+        let returnValue = this.filePath;
         let onlyFileName;
         if (this.fileName == "") {
             onlyFileName = `${this.getCurrentDate()}.log`;
@@ -57,7 +57,7 @@ class LogHelper {
 
     getCurrentDate = () => {
         // Obtiene la fecha actual en formato YYYY-MM-DD
-        const returnValue = new Date().toISOString().slice(0, 10); 
+        const returnValue = new Date().toISOString().slice(0, 10);
         return returnValue;
     }
 }
